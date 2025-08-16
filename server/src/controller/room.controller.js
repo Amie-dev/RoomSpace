@@ -39,8 +39,3 @@ export const getRoom=asyncHandler(async(req,res)=>{
     res.json(new ApiResponse(100,room,"bhjshdbhsjhdn"))
 })
 
-export const getRoomData=asyncHandler(async(req,res)=>{
-    const {uniqueId}=req.params
-    const room = await Newroom.findOne({ uniqueId });
-    if (!room) return res.status(404).json({ error: "Room not found" });
-})
