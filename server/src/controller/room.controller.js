@@ -35,7 +35,7 @@ export const createRoom = asyncHandler(async (req, res) => {
 
 
 export const getRoom=asyncHandler(async(req,res)=>{
-    const room=await Newroom.find().select("-uniqueId -dataField")
+    const room=await Newroom.find().select(" -dataField")
     res.json(new ApiResponse(100,room,"bhjshdbhsjhdn"))
 })
 
