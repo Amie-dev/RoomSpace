@@ -1,39 +1,36 @@
 import mongoose, { Schema } from "mongoose";
 
-const dataFieldSchema = new Schema(
+const roomSchema = new Schema(
   {
-    type: {
-      type: String, // "string" | "file"
-      required: true,
-      enum: ["string", "file"], // optional: restrict to valid types
-    },
-    content: {
+    roomName: {
       type: String,
-      required: true, // could be actual text or file path/URL
+      required: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    description: {
+      type: String,
+    },
+    uniqueId: {
+      type: Number,
+      required: true,
+      unique: true,
+    },
+    dataField: {
+      type: Schema.Types.ObjectId,
+      ref: "Data",
     },
   },
-  { _id: false } // optional: disables automatic _id for subdocuments
+  {
+    timestamps: true,
+  }
 );
 
-const roomSchema = new Schema({
-  roomName: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-  },
-  uniqueId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  dataField: [dataFieldSchema],
-});
+// roomSchema.pre("save", function (next) {
+//   if (!this.uniqueId) {
+//     this.uniqueId = Math.floor(1000 + Math.random() * 9000);
+//   }
+//   next();
+// });
+
 
 const Room = mongoose.model("Room", roomSchema);
 export default Room;
