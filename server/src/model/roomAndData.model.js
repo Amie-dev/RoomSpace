@@ -41,15 +41,20 @@ const roomSchema = new Schema(
       index: true,
     },
     dataField: [dataFieldSchema],
-    createdAt: {
-      type: Date,
-      default: Date.now,
-      expires: 60 * 60 * 5, // TTL: 5 hours in seconds
-    },
+    // createdAt: {
+    //   type: Date,
+    //   default: Date.now,
+    //   expires: 3600, // TTL: 1 hour (in seconds)
+    // },
   },
   {
     timestamps: true, // Adds createdAt and updatedAt automatically
   }
 );
+
+// ⏳ TTL: delete docs 1 hour (3600s) after createdAt
+roomSchema.index({ createdAt: 1 }, { expireAfterSeconds: 60*60*10 });
+
+
 const Newroom=model("Newroom", roomSchema);
 export default Newroom
