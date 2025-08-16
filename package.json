@@ -1,0 +1,20 @@
+{
+  "name": "roomspace",
+  "version": "1.0.0",
+  "description": "RoomSpace is a collaborative platform where anyone can create or join rooms using a unique ID. Inside each room, members can share text, files, and ideas in real time, keeping everything organized in one shared space. Whether for teamwork, study groups, or quick file sharing, RoomSpace makes collaboration simple, fast, and accessible from anywhere.",
+  "main": "src/index.js",
+  "scripts": {
+    "dev":"nodeman src/index.js",
+    "start":"node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aminul Islam",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.1",
+    "nodeman": "^1.1.2"
+  }
+}
