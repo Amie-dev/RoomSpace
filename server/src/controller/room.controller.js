@@ -1,4 +1,5 @@
-import Room from "../model/room.model.js";
+
+import Newroom from "../model/roomAndData.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/AsyncHandler.js";
@@ -17,7 +18,7 @@ export const createRoom = asyncHandler(async (req, res) => {
 
   const uniqueId = Math.floor(1000 + Math.random() * 9000);
 
-  const room = await Room.create({
+  const room = await Newroom.create({
     roomName,
     description,
     uniqueId,
@@ -34,6 +35,12 @@ export const createRoom = asyncHandler(async (req, res) => {
 
 
 export const getRoom=asyncHandler(async(req,res)=>{
-    const room=await Room.find().select("-uniqueId")
+    const room=await Newroom.find().select("-uniqueId -dataField")
     res.json(new ApiResponse(100,room,"bhjshdbhsjhdn"))
+})
+
+export const getRoomData=asyncHandler(async(req,res)=>{
+    const {uniqueId}=req.params
+    const room = await Newroom.findOne({ uniqueId });
+    if (!room) return res.status(404).json({ error: "Room not found" });
 })
