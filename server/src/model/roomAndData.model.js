@@ -14,6 +14,9 @@ const dataFieldSchema = new Schema(
       type: String, // actual string or file path/URL
       required: true,
     },
+    public_id:{
+      type:String
+    },
     createdAt: {
       type: Date,
       default: Date.now,
