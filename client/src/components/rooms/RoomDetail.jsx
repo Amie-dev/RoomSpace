@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -20,21 +20,7 @@ import {
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { handleError, clearErrorToast } from "@/lib/errorHandler";
-=======
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { toast } from 'sonner';
-import { FileText, MessageSquare, Calendar, User, Download, LinkIcon, Share2 } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
-import { handleError, clearErrorToast } from '@/lib/errorHandler';
-import Api from '@/utils/api.js';
->>>>>>> Stashed changes
+
 
 const RoomDetail = () => {
   const { uniqueId } = useParams();
@@ -51,13 +37,11 @@ const RoomDetail = () => {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-<<<<<<< Updated upstream
+
       const response = await axios.get(
         `${API_BASE_URL}/api/v1/data/${uniqueId}/get-data`,
       );
-=======
-      const response = await Api.get(`/data/${uniqueId}/get-data`);
->>>>>>> Stashed changes
+
       setRoomData(response.data.data);
       // Clear any previous error toasts when connection is restored
       clearErrorToast();
@@ -83,7 +67,7 @@ const RoomDetail = () => {
     }
 
     try {
-<<<<<<< Updated upstream
+
       const response = await axios.post(
         `${API_BASE_URL}/api/v1/data/set-data/${uniqueId}`,
         formData,
@@ -91,11 +75,7 @@ const RoomDetail = () => {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-=======
-      const response = await Api.post(`/data/set-data/${uniqueId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
->>>>>>> Stashed changes
+
         },
       );
 
