@@ -1,42 +1,42 @@
-import { useState } from 'react';
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogDescription, 
-  DialogFooter 
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Share2 } from 'lucide-react';
-import { toast } from 'sonner';
-import { handleError } from '@/lib/errorHandler';
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Share2 } from "lucide-react";
+import { toast } from "sonner";
+import { handleError } from "@/lib/errorHandler";
 
 const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
-  const [roomName, setRoomName] = useState('');
-  const [description, setDescription] = useState('');
+  const [roomName, setRoomName] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleCreate = async (e) => {
     e.preventDefault();
     if (!roomName.trim()) {
       return;
     }
-    
+
     try {
       await onCreateRoom({ roomName, description });
       // If successful, clear the form
-      setRoomName('');
-      setDescription('');
+      setRoomName("");
+      setDescription("");
     } catch (error) {
       handleError(error, "create room");
     }
   };
 
   const handleCancel = () => {
-    setRoomName('');
-    setDescription('');
+    setRoomName("");
+    setDescription("");
     onOpenChange(false);
   };
 
@@ -45,16 +45,18 @@ const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Share2 className="h-5 w-5" />
             Create New Room
           </DialogTitle>
           <DialogDescription>
             Set up a new collaboration space for your team
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={(e) => {
-          return handleCreate(e);
-        }} className="grid gap-4 py-4">
+        <form
+          onSubmit={(e) => {
+            return handleCreate(e);
+          }}
+          className="grid gap-4 py-4"
+        >
           <div className="grid gap-2">
             <Label htmlFor="roomName">Room Name</Label>
             <Input
