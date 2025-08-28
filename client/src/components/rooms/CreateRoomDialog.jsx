@@ -11,8 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Share2 } from "lucide-react";
-import { toast } from "sonner";
+
 import { handleError } from "@/lib/errorHandler";
+import { API_BASE_URL } from "@/config";
 
 const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
   const [roomName, setRoomName] = useState("");

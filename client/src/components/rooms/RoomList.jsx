@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "@/config";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -27,7 +28,7 @@ const RoomList = () => {
 
   const fetchRooms = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/room");
+      const response = await axios.get(`${API_BASE_URL}/api/v1/room`);
       setRooms(response.data.data);
       // Clear any previous error toasts when connection is restored
       clearErrorToast();
@@ -47,7 +48,7 @@ const RoomList = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/room/create-room",
+        `${API_BASE_URL}/api/v1/room/create-room`,
         {
           roomName,
           description,
