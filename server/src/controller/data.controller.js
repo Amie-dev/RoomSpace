@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/AsyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import logger from "../utils/logger.js";
 export const setDataFiles = asyncHandler(async (req, res) => {
   const { uniqueId } = req.params;
   const { content } = req.body;
@@ -10,12 +11,14 @@ export const setDataFiles = asyncHandler(async (req, res) => {
 
   // Step 1: Validate input
   if (!content && !file) {
+    logger.warn(`[DATA] No content or file provided for room ${uniqueId}`);
     throw new ApiError(400, "Either content or file must be provided");
   }
 
   // Step 2: Check if the room exists
   const room = await Newroom.findOne({ uniqueId });
   if (!room) {
+    logger.error(`[DATA] Room not found for uniqueId: ${uniqueId}`);
     throw new ApiError(404, "Room not found");
   }
 
@@ -28,34 +31,44 @@ export const setDataFiles = asyncHandler(async (req, res) => {
       content: cloudinaryResponse.url,
       public_id: cloudinaryResponse.public_id,
     };
+    logger.success(
+      `[DATA] File uploaded for room ${uniqueId}: ${cloudinaryResponse.url}`,
+    );
   } else {
     newData = {
       datatype: "string",
       content: content.trim(),
     };
+    logger.success(`[DATA] Text content added for room ${uniqueId}`);
   }
 
   // Step 4: Save data to room
   room.dataField.push(newData);
   await room.save();
+  logger.info(`[DATA] Data saved to room ${uniqueId}`);
 
   // Step 5: Respond
-  res.status(201).json(new ApiResponse(201, newData, "Data linked to room successfully"));
+  res
+    .status(201)
+    .json(new ApiResponse(201, newData, "Data linked to room successfully"));
 });
-
 
 export const getDataFiels = asyncHandler(async (req, res) => {
   const { uniqueId } = req.params;
 
   if (!uniqueId) {
+    logger.warn(`[DATA] No uniqueId provided for data fetch`);
     throw new ApiError(400, "Unique ID is required");
   }
 
   const room = await Newroom.findOne({ uniqueId });
   if (!room) {
+    logger.error(`[DATA] Room not found for uniqueId: ${uniqueId}`);
     throw new ApiError(404, "Room not found");
   }
 
-  res.status(200).json(new ApiResponse(200, room.dataField, "Data fetched successfully"));
+  logger.info(`[DATA] Data fetched for room ${uniqueId}`);
+  res
+    .status(200)
+    .json(new ApiResponse(200, room.dataField, "Data fetched successfully"));
 });
-

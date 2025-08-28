@@ -1,18 +1,18 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Home from './page/Home'
-import Room from './page/Room'
-import CreateRoom from './page/CreateRoom'
+import { Outlet } from 'react-router-dom';
+import { Header, Footer } from './components';
+import { Toaster } from './components/ui/toaster';
 
-const App = () => {
+function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/room/:uniqueId' element={<Room/>}/>
-      <Route path='/create-room' element={<CreateRoom/>}/>
-      {/* <Route path='/' element={<Home/>}/> */}
-    </Routes>
-  )
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-grow container mx-auto max-w-4xl px-4 py-8">
+        <Outlet />
+      </main>
+      <Footer />
+      <Toaster />
+    </div>
+  );
 }
 
-export default App
+export default App;
