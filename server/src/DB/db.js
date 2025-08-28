@@ -1,14 +1,21 @@
 import mongoose from "mongoose";
 import { db_Name } from "../const.js";
+import logger from "../utils/logger.js";
+
+let dbConnected = false;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(`${process.env.MONGODB_URL}/${db_Name}`, { autoIndex: true });
-    console.log(`DB connections succesfull`);
+    await mongoose.connect(`${process.env.MONGODB_URL}/${db_Name}`, {
+      autoIndex: true,
+    });
+    dbConnected = true;
+    logger.success(`[DB] Connection successful`);
   } catch (error) {
-    console.log("MongoDB Connections fails", error);
-    process.exit(1);
+    dbConnected = false;
+    logger.error(`[DB] Connection failed: ${error.message}`);
+    // Don't exit, just log and keep running
   }
 };
 
-export default connectDB
+export { connectDB, dbConnected };
