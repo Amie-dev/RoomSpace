@@ -47,15 +47,11 @@ export const setDataFiles = asyncHandler(async (req, res) => {
   await room.save();
   logger.info(`[DATA] Data saved to room ${uniqueId}`);
 
-<<<<<<< HEAD
 
-  res.status(201).json(new ApiResponse(201, newData, "Data linked to room successfully"));
-=======
   // Step 5: Respond
   res
     .status(201)
     .json(new ApiResponse(201, newData, "Data linked to room successfully"));
->>>>>>> origin/main
 });
 
 export const getDataFiels = asyncHandler(async (req, res) => {
