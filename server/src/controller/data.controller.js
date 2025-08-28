@@ -9,20 +9,20 @@ export const setDataFiles = asyncHandler(async (req, res) => {
   const { content } = req.body;
   const file = req.file;
 
-  // Step 1: Validate input
+ 
   if (!content && !file) {
     logger.warn(`[DATA] No content or file provided for room ${uniqueId}`);
     throw new ApiError(400, "Either content or file must be provided");
   }
 
-  // Step 2: Check if the room exists
+
   const room = await Newroom.findOne({ uniqueId });
   if (!room) {
     logger.error(`[DATA] Room not found for uniqueId: ${uniqueId}`);
     throw new ApiError(404, "Room not found");
   }
 
-  // Step 3: Upload file to Cloudinary if present
+ 
   let newData;
   if (file) {
     const cloudinaryResponse = await uploadOnCloudinary(file.path);
@@ -42,10 +42,11 @@ export const setDataFiles = asyncHandler(async (req, res) => {
     logger.success(`[DATA] Text content added for room ${uniqueId}`);
   }
 
-  // Step 4: Save data to room
+
   room.dataField.push(newData);
   await room.save();
   logger.info(`[DATA] Data saved to room ${uniqueId}`);
+
 
   // Step 5: Respond
   res
