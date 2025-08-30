@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { dbLife } from "../const.js";
 
 const { Schema, model } = mongoose;
 
@@ -55,8 +56,13 @@ const roomSchema = new Schema(
   }
 );
 
+// import dotenv from "dotenv";
+// dotenv.config()
+
+// const dbLife = Number(process.env.DB_LIFE) || 18000; // fallback 5h (18000s)
 // ⏳ TTL: delete docs 1 hour (3600s) after createdAt
-roomSchema.index({ createdAt: 1 }, { expireAfterSeconds: 60*60*10 });
+console.log(dbLife);
+roomSchema.index({ createdAt: 1 }, { expireAfterSeconds: dbLife });
 
 
 const Newroom=model("Newroom", roomSchema);
