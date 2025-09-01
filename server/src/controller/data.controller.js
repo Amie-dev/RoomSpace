@@ -65,6 +65,7 @@ export const setDataFiles = asyncHandler(async (req, res) => {
       datatype: "file",
       content: cloudinaryResponse.url,
       public_id: cloudinaryResponse.public_id,
+      createdAt: new Date(),
     };
     logger.success(
       `[DATA] File uploaded for room ${uniqueId}: ${cloudinaryResponse.url}`,
@@ -73,6 +74,7 @@ export const setDataFiles = asyncHandler(async (req, res) => {
     newData = {
       datatype: "string",
       content: content.trim(),
+      createdAt: new Date(),
     };
     logger.success(`[DATA] Text content added for room ${uniqueId}`);
   }

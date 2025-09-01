@@ -1,2 +1,9 @@
-export { default as RoomList } from './RoomList';
-export { default as RoomDetail } from './RoomDetail';
+export { default as Dashboard } from './Dashboard';
+export { default as CreateDialog } from './CreateDialog';
+export { default as WelcomeScreen } from './WelcomeScreen';
+export { default as RoomSidebar } from './RoomSidebar';
+export { default as Message } from './Message';
+export { default as DateSeparator } from './DateSeparator';
+export { default as MessagesArea } from './MessagesArea';
+export { default as ChatHeader } from './ChatHeader';
+export { default as MessageInput } from './MessageInput';

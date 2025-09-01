@@ -74,3 +74,42 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Hide scrollbar by default */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Show scrollbar on hover */
+  .hover\:scrollbar-show:hover {
+    -ms-overflow-style: auto;
+    scrollbar-width: thin;
+  }
+  .hover\:scrollbar-show:hover::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+  }
+  .hover\:scrollbar-show:hover::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .hover\:scrollbar-show:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  .hover\:scrollbar-show:hover::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Dark mode scrollbar */
+  .dark .hover\:scrollbar-show:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .dark .hover\:scrollbar-show:hover::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
