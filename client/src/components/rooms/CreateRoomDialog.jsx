@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import { useState } from "react";
 import {
   Dialog,
@@ -11,46 +10,43 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Share2 } from "lucide-react";
-
 import { handleError } from "@/lib/errorHandler";
 import { API_BASE_URL } from "@/config";
-=======
-import { useState } from 'react';
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogDescription, 
-  DialogFooter 
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Share2 } from 'lucide-react';
-import { toast } from 'sonner';
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { handleError } from '@/lib/errorHandler';
->>>>>>> Stashed changes
+import axios from "axios";
 
 const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
   const [roomName, setRoomName] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    if (!roomName.trim()) {
-      return;
-    }
+    if (!roomName.trim()) return;
 
     try {
-      await onCreateRoom({ roomName, description });
-      // If successful, clear the form
+      setLoading(true);
+
+      // ✅ await axios call
+      const res = await axios.post(`${API_BASE_URL}/api/v1/room/create-room`, {
+        roomName,
+        description,
+      });
+
+      console.log("Room created:", res.data);
+
+      // notify parent if provided
+      if (onCreateRoom) {
+        await onCreateRoom(res.data);
+      }
+
+      // reset form
       setRoomName("");
       setDescription("");
+      onOpenChange(false);
     } catch (error) {
       handleError(error, "create room");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,44 +67,39 @@ const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
             Set up a new collaboration space for your team
           </DialogDescription>
         </DialogHeader>
-        <form
-          onSubmit={(e) => {
-            return handleCreate(e);
-          }}
-          className="grid gap-4 py-4"
-        >
+
+        {/* put Button inside form so submit works */}
+        <form onSubmit={handleCreate} className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="roomName">Room Name</Label>
             <Input
               id="roomName"
               placeholder="Enter room name"
               value={roomName}
-              onChange={(e) => {
-                setRoomName(e.target.value);
-              }}
+              onChange={(e) => setRoomName(e.target.value)}
               autoFocus
             />
           </div>
+
           <div className="grid gap-2">
             <Label htmlFor="description">Description</Label>
             <Input
               id="description"
               placeholder="Enter description (optional)"
               value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
+
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={!roomName.trim() || loading}>
+              {loading ? "Creating..." : "Create Room"}
+            </Button>
+          </DialogFooter>
         </form>
-        <DialogFooter>
-          <Button variant="outline" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button type="submit" disabled={!roomName.trim()}>
-            Create Room
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
