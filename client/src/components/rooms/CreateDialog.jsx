@@ -10,14 +10,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { handleError } from "@/lib/errorHandler";
+
+import { Share2 } from "lucide-react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { handleError } from "@/services/api";
 import { API_BASE_URL } from "@/config";
 import axios from "axios";
+
 
 const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
   const [roomName, setRoomName] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -67,9 +71,13 @@ const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
             Set up a new collaboration space for your team
           </DialogDescription>
         </DialogHeader>
-
-        {/* put Button inside form so submit works */}
-        <form onSubmit={handleCreate} className="grid gap-4 py-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleCreate(e);
+          }}
+          className="grid gap-4 py-4"
+        >
           <div className="grid gap-2">
             <Label htmlFor="roomName">Room Name</Label>
             <Input
@@ -90,13 +98,12 @@ const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={handleCancel}>
+            <Button variant="outline" onClick={handleCancel} type="button">
               Cancel
             </Button>
-            <Button type="submit" disabled={!roomName.trim() || loading}>
-              {loading ? "Creating..." : "Create Room"}
+            <Button type="submit" disabled={!roomName.trim()}>
+              Create Room
             </Button>
           </DialogFooter>
         </form>
