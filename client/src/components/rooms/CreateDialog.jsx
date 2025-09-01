@@ -53,44 +53,45 @@ const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
             Set up a new collaboration space for your team
           </DialogDescription>
         </DialogHeader>
-        <form
-          onSubmit={(e) => {
-            return handleCreate(e);
+        &lt;form
+          onSubmit={(e) =&gt; {
+            e.preventDefault();
+            handleCreate(e);
           }}
           className="grid gap-4 py-4"
-        >
-          <div className="grid gap-2">
-            <Label htmlFor="roomName">Room Name</Label>
-            <Input
+        &gt;
+          &lt;div className="grid gap-2"&gt;
+            &lt;Label htmlFor="roomName"&gt;Room Name&lt;/Label&gt;
+            &lt;Input
               id="roomName"
               placeholder="Enter room name"
               value={roomName}
-              onChange={(e) => {
+              onChange={(e) =&gt; {
                 setRoomName(e.target.value);
               }}
               autoFocus
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="description">Description</Label>
-            <Input
+            /&gt;
+          &lt;/div&gt;
+          &lt;div className="grid gap-2"&gt;
+            &lt;Label htmlFor="description"&gt;Description&lt;/Label&gt;
+            &lt;Input
               id="description"
               placeholder="Enter description (optional)"
               value={description}
-              onChange={(e) => {
+              onChange={(e) =&gt; {
                 setDescription(e.target.value);
               }}
-            />
-          </div>
-        </form>
-        <DialogFooter>
-          <Button variant="outline" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button type="submit" disabled={!roomName.trim()}>
-            Create Room
-          </Button>
-        </DialogFooter>
+            /&gt;
+          &lt;/div&gt;
+          &lt;DialogFooter&gt;
+            &lt;Button variant="outline" onClick={handleCancel} type="button"&gt;
+              Cancel
+            &lt;/Button&gt;
+            &lt;Button type="submit" disabled={!roomName.trim()}&gt;
+              Create Room
+            &lt;/Button&gt;
+          &lt;/DialogFooter&gt;
+        &lt;/form&gt;
       </DialogContent>
     </Dialog>
   );
