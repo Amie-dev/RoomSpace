@@ -11,9 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Share2 } from "lucide-react";
-import { toast } from "sonner";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { handleError } from "@/lib/errorHandler";
+import { handleError } from "@/services/api";
 import { API_BASE_URL } from "@/config";
 
 const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
@@ -53,45 +52,45 @@ const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
             Set up a new collaboration space for your team
           </DialogDescription>
         </DialogHeader>
-        &lt;form
-          onSubmit={(e) =&gt; {
+        <form
+          onSubmit={(e) => {
             e.preventDefault();
             handleCreate(e);
           }}
           className="grid gap-4 py-4"
-        &gt;
-          &lt;div className="grid gap-2"&gt;
-            &lt;Label htmlFor="roomName"&gt;Room Name&lt;/Label&gt;
-            &lt;Input
+        >
+          <div className="grid gap-2">
+            <Label htmlFor="roomName">Room Name</Label>
+            <Input
               id="roomName"
               placeholder="Enter room name"
               value={roomName}
-              onChange={(e) =&gt; {
+              onChange={(e) => {
                 setRoomName(e.target.value);
               }}
               autoFocus
-            /&gt;
-          &lt;/div&gt;
-          &lt;div className="grid gap-2"&gt;
-            &lt;Label htmlFor="description"&gt;Description&lt;/Label&gt;
-            &lt;Input
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="description">Description</Label>
+            <Input
               id="description"
               placeholder="Enter description (optional)"
               value={description}
-              onChange={(e) =&gt; {
+              onChange={(e) => {
                 setDescription(e.target.value);
               }}
-            /&gt;
-          &lt;/div&gt;
-          &lt;DialogFooter&gt;
-            &lt;Button variant="outline" onClick={handleCancel} type="button"&gt;
+            />
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleCancel} type="button">
               Cancel
-            &lt;/Button&gt;
-            &lt;Button type="submit" disabled={!roomName.trim()}&gt;
+            </Button>
+            <Button type="submit" disabled={!roomName.trim()}>
               Create Room
-            &lt;/Button&gt;
-          &lt;/DialogFooter&gt;
-        &lt;/form&gt;
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );
