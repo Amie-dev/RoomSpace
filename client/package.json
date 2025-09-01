@@ -1,7 +1,29 @@
 {
-  "name": "client",
+  "name": "roomspace",
+  "version": "1.0.0",
+  "description": "Create collaborative rooms to share files and communicate with your team in real-time.",
+  "keywords": [
+    "collaboration",
+    "file-sharing",
+    "team-communication",
+    "real-time",
+    "rooms"
+  ],
+  "homepage": "https://roomspace.amiedev.in",
+  "bugs": {
+    "url": "https://github.com/amie-dev/roomspace/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "RoomSpace Team",
+    "email": "contact@amiedev.in",
+    "url": "https://amiedev.in"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amie-dev/roomspace.git"
+  },
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

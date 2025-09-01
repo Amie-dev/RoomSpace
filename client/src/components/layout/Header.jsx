@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/common/theme";
@@ -30,6 +30,16 @@ const Header = () => {
           )}
           <span className="sr-only">Toggle theme</span>
         </Button>
+        <a 
+          href="https://github.com/amie-dev/roomspace" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          <Button variant="outline" size="icon">
+            <Github className="h-5 w-5" />
+            <span className="sr-only">GitHub</span>
+          </Button>
+        </a>
       </div>
     </header>
   );
