@@ -17,11 +17,10 @@ import { handleError } from "@/services/api";
 import { API_BASE_URL } from "@/config";
 import axios from "axios";
 
-
 const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
   const [roomName, setRoomName] = useState("");
   const [description, setDescription] = useState("");
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -102,8 +101,8 @@ const CreateRoomDialog = ({ open, onOpenChange, onCreateRoom }) => {
             <Button variant="outline" onClick={handleCancel} type="button">
               Cancel
             </Button>
-            <Button type="submit" disabled={!roomName.trim()}>
-              Create Room
+            <Button type="submit" disabled={!roomName.trim() || loading}>
+              {loading ? "Creating..." : "Create Room"}
             </Button>
           </DialogFooter>
         </form>

@@ -35,8 +35,7 @@ const Dashboard = () => {
   const messagesEndRef = useRef(null);
 
   // Fetch rooms on mount
-  useEffect(() => {
-    const loadRooms = async () => {
+  const loadRooms = async () => {
       try {
         const data = await apiFetchRooms();
         setRooms(data);
@@ -47,14 +46,14 @@ const Dashboard = () => {
         setIsRoomsLoading(false);
       }
     };
+  useEffect(() => {
+    
     loadRooms();
   }, []);
 
   // Fetch room data when room changes
-  useEffect(() => {
-    if (!uniqueId) return;
-
-    const loadRoomData = async () => {
+  const loadRoomData = async () => {
+      if (!uniqueId) return;
       try {
         setIsChatLoading(true);
         const data = await apiFetchRoomData(uniqueId);
@@ -66,12 +65,14 @@ const Dashboard = () => {
         setIsChatLoading(false);
       }
     };
+  useEffect(() => {
+
     loadRoomData();
   }, [uniqueId]);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [roomData]);
 
   // Handlers
@@ -134,7 +135,7 @@ const Dashboard = () => {
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/room/${uniqueId}`);
+    navigator.clipboard.writeText(`${window.location.origin}/app/room/${uniqueId}`);
     toast.success("Room link copied to clipboard!");
   };
 

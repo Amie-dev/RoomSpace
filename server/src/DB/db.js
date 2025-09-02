@@ -6,7 +6,7 @@ let dbConnected = false;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect(`${process.env.MONGODB_URL}/${db_Name}`, {
       autoIndex: true,
       authSource: 'admin',
     });
