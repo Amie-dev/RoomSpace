@@ -1,6 +1,3 @@
-
-
-
 # 🚀 RoomSpace
 
 A modern and minimal **room management app** built with **React, Node.js, Express, and MongoDB**.  
@@ -32,20 +29,20 @@ RoomSpace provides a simple way to create, manage, and share rooms — perfect f
 ## 🛠️ Tech Stack
 
 **Frontend:**  
+
 - React (Vite)  
 - Tailwind CSS  
 - shadcn/ui components  
 - Lucide Icons  
 
 **Backend:**  
+
 - Node.js + Express  
 - MongoDB (Mongoose)  
 
 ---
 
 ## 📂 Project Structure
-
-
 
 roomspace/
 │── backend/           # Express + MongoDB API
@@ -62,17 +59,17 @@ roomspace/
 │
 └── README.md
 
-
-
 ## 🚦 Getting Started
 
 ### 🔹 Prerequisites
+
 - Node.js (>= 18)  
 - MongoDB Atlas or local MongoDB  
 
 ### 🔹 Setup
 
 1. **Clone repo**
+
    ```bash
    git clone https://github.com/amie-dev/RoomSpace.git
    cd RoomSpace
@@ -86,6 +83,7 @@ roomspace/
      cd frontend
      npm install
      ```
+
    * Backend:
 
      ```bash
@@ -108,14 +106,13 @@ roomspace/
      cd backend
      npm run dev
      ```
+
    * Frontend:
 
      ```bash
      cd frontend
      npm run dev
      ```
-
-
 
 ## 📡 API Endpoints (Rooms)
 
@@ -143,10 +140,10 @@ roomspace/
 
 ## 📌 Roadmap
 
-* [ ] Add authentication (JWT / OAuth)
-* [ ] Real-time rooms (WebSocket / Socket.io)
-* [ ] Dark mode support
-* [ ] User profile + settings
+- [ ] Add authentication (JWT / OAuth)
+- [ ] Real-time rooms (WebSocket / Socket.io)
+- [ ] Dark mode support
+- [ ] User profile + settings
 
 ---
 
@@ -172,7 +169,4 @@ MIT License © 2025 [Aminul](https://github.com/amie-dev)
 
 ---
 
-
-
 Would you like me to also **add shields.io badges** at the top (e.g. React, Node.js, MongoDB, License, Stars) so your GitHub page looks more professional?
-
